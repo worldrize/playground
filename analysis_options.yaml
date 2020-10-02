@@ -1,3 +1,6 @@
 analyzer:
   enable-experiment:
     - non-nullable
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"

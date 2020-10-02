@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playground/flavors.dart';
 import 'package:playground/pages/counter_page.dart';
 
-void main() {
+void runAppWithFlavor() {
   // const にしないとコンパイル時に読み込まれない
   // <https://qiita.com/tetsufe/items/3f2257ac12f812d3f2d6>
   const flavor =
@@ -19,14 +19,4 @@ void main() {
       ),
     ),
   ));
-}
-
-class CounterService {
-  ICounterRepository _repo;
-
-  CounterService(ICounterRepository repo) : _repo = repo;
-
-  Future<int> increment(int count) async {
-    return _repo.increment(count);
-  }
 }

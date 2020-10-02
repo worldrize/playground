@@ -1,15 +1,11 @@
-// Copyright © 2020 WorldRIZe. All rights reserved.
+import 'package:playground/domain/icounter_repository.dart';
 
-import 'package:flutter/material.dart';
+class CounterService {
+  ICounterRepository _repo;
 
-class XXX extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(''),
-      ),
-      body: null,
-    );
+  CounterService(ICounterRepository repo) : _repo = repo;
+
+  Future<int> increment(int count) async {
+    return _repo.increment(count);
   }
 }

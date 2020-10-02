@@ -25,24 +25,6 @@
         ],
       },
     }],
-    ["@google/semantic-release-replace-plugin", {
-      "replacements": [
-        {
-          "files": ["pubspec.yaml"],
-          "from": "version: *",
-          "to": "version: ${nextRelease.version}",
-          "results": [
-            {
-              "file": "pubspec.yaml",
-              "hasChanged": true,
-              "numMatches": 1,
-              "numReplacements": 1,
-            },
-          ],
-          "countMatches": true,
-        },
-      ],
-    }],
     ["@semantic-release/release-notes-generator", {
       "preset": "conventionalcommits",
       "releaseRules": [
@@ -68,7 +50,6 @@
     "@semantic-release/github",
     ["@semantic-release/git", {
       "message": "chore(release): ${nextRelease.version} [skip semantic-release]",
-      "assets": ["pubspec.yaml"],
     }],
     ["@saithodev/semantic-release-backmerge", {
       "branchName": "master",
