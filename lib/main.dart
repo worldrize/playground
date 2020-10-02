@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:state_notifier/state_notifier.dart';
+import 'package:playground/flavors.dart';
+import 'package:playground/pages/counter_page.dart';
 
 void main() {
+  // const にしないとコンパイル時に読み込まれない
+  // <https://qiita.com/tetsufe/items/3f2257ac12f812d3f2d6>
+  const flavor =
+      bool.hasEnvironment('FLAVOR') ? String.fromEnvironment('FLAVOR') : null;
+  print(flavor);
+  // set flavor enum
+  F.fromEnvironment(flavor);
+
   runApp(ProviderScope(
-    child: CounterApp(),
+    child: MaterialApp(
+      home: CounterPage(
+        flavor: F.appFlavor,
+      ),
+    ),
   ));
 }
 
-// <https://qiita.com/karamage/items/8d1352e5a4f1b079210b>
-class Counter extends StateNotifier<int> {
-  Counter() : super(0);
-  void increment() => state++;
+abstract class ICounterRepository {
+  Future<int> increment(int count);
 }
 
-final counterProvider = StateNotifierProvider((_) => Counter());
-
-class CounterApp extends HookWidget {
+class CounterRepositoryImpl extends ICounterRepository {
   @override
-  Widget build(BuildContext context) {
-    final state = useProvider(counterProvider.state);
-    final counter = useProvider(counterProvider);
+  Future<int> increment(int count) async {
+    Future.delayed(Duration(milliseconds: 300));
+    return count + 1;
+  }
+}
 
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('CounterApp')),
-        body: Center(
-          child: Text(state.toString()),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => counter.increment(),
-          child: Icon(Icons.add),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
-      ),
-    );
+class CounterService {
+  ICounterRepository _repo;
+
+  CounterService(ICounterRepository repo) : _repo = repo;
+
+  Future<int> increment(int count) async {
+    return _repo.increment(count);
   }
 }

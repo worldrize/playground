@@ -1,6 +1,6 @@
 name: playground
 description: A new Flutter project.
-version: 1.0.0+1
+version: 1.0.0-beta+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -21,6 +21,41 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   freezed:
+  flutter_flavorizr: ^1.0.7
 
 flutter:
   uses-material-design: true
+
+# <https://pub.dev/packages/flutter_flavorizr>
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+    ios:
+
+  flavors:
+    dev:
+      app:
+        name: "PlayGround-dev"
+      android:
+        applicationId: "com.example.playground.dev"
+      ios:
+        bundleId: "com.example.playground.dev"
+
+    stg:
+      app:
+        name: "PlayGround-stg"
+
+      android:
+        applicationId: "com.example.playground.stg"
+      ios:
+        bundleId: "com.example.playground.stg"
+
+    prd:
+      app:
+        name: "PlayGround-prd"
+
+      android:
+        applicationId: "com.example.playground"
+      ios:
+        bundleId: "com.example.playground"

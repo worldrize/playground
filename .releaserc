@@ -1,6 +1,7 @@
 {
   "branches": [
     "release",
+    {name: "master", "prerelease": "beta"}
   ],
   "plugins": [
     ["@semantic-release/commit-analyzer", {
@@ -12,7 +13,7 @@
           {type: 'fix', release: 'patch'},
           {type: "improvement", release: "patch"},
           {type: 'docs', release: 'patch'},
-          {type: 'refactor', release: 'patch'}
+          {type: 'refactor', release: 'patch'},
       ],
       "presetConfig": {
         "types": [
@@ -20,9 +21,27 @@
           {"type": "fix", "section": "Bug Fixes", "hidden": false},
           {"type": "improvement", "section": "Improvement", "hidden": false},
           {"type": "docs", "section": "Docs", "hidden": false},
-          {"type": "refactor", "section": "Refactor", "hidden": false}
-        ]
-      }
+          {"type": "refactor", "section": "Refactor", "hidden": false},
+        ],
+      },
+    }],
+    ["@google/semantic-release-replace-plugin", {
+      "replacements": [
+        {
+          "files": ["pubspec.yaml"],
+          "from": "version: *",
+          "to": "version: ${nextRelease.version}",
+          "results": [
+            {
+              "file": "pubspec.yaml",
+              "hasChanged": true,
+              "numMatches": 1,
+              "numReplacements": 1,
+            },
+          ],
+          "countMatches": true,
+        },
+      ],
     }],
     ["@semantic-release/release-notes-generator", {
       "preset": "conventionalcommits",
@@ -33,7 +52,7 @@
           {type: 'fix', release: 'patch'},
           {type: "improvement", release: "patch"},
           {type: 'docs', release: 'patch'},
-          {type: 'refactor', release: 'patch'}
+          {type: 'refactor', release: 'patch'},
       ],
       "presetConfig": {
         "types": [
@@ -41,14 +60,19 @@
           {"type": "fix", "section": "Bug Fixes", "hidden": false},
           {"type": "improvement", "section": "Improvement", "hidden": false},
           {"type": "docs", "section": "Docs", "hidden": false},
-          {"type": "refactor", "section": "Refactor", "hidden": false}
-        ]
-      }
+          {"type": "refactor", "section": "Refactor", "hidden": false},
+        ],
+      },
     }],
     "@semantic-release/changelog",
     "@semantic-release/github",
     ["@semantic-release/git", {
-      "message": "chore(release): ${nextRelease.version} [skip semantic-release]"
-    }]
-  ]
+      "message": "chore(release): ${nextRelease.version} [skip semantic-release]",
+      "assets": ["pubspec.yaml"],
+    }],
+    ["@saithodev/semantic-release-backmerge", {
+      "branchName": "master",
+      "message": "chore(release): Preparations for next release [skip ci]",
+    }],
+  ],
 }
