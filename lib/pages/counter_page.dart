@@ -6,7 +6,7 @@ import 'package:playground/flavors.dart';
 import 'package:playground/main.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-// 原則1画面1notifierなので
+// 原則1画面1notifierなので同じファイルに置く?
 
 // <https://qiita.com/karamage/items/8d1352e5a4f1b079210b>
 class Counter extends StateNotifier<int> {
