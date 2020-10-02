@@ -21,18 +21,6 @@ void main() {
   ));
 }
 
-abstract class ICounterRepository {
-  Future<int> increment(int count);
-}
-
-class CounterRepositoryImpl extends ICounterRepository {
-  @override
-  Future<int> increment(int count) async {
-    Future.delayed(Duration(milliseconds: 300));
-    return count + 1;
-  }
-}
-
 class CounterService {
   ICounterRepository _repo;
 
