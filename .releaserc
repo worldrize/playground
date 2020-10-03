@@ -50,7 +50,7 @@
     [
       "@semantic-release/exec",
       {
-        "successCmd": "./scripts/semver.sed.sh ${nextRelease.version}"
+        "prepareCmd": "./scripts/semver.sed.sh ${nextRelease.version}"
       }
     ],
     "@semantic-release/github",
