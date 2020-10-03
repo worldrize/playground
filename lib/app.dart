@@ -12,6 +12,8 @@ void runAppWithFlavor() {
   // set flavor enum
   F.fromEnvironment(flavor);
 
+  print("hogeee");
+
   runApp(ProviderScope(
     child: MaterialApp(
       home: CounterPage(
