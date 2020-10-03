@@ -2,8 +2,8 @@ name: semantic release
 on:
   push:
     branches:
-      - release
       - master
+      - beta
 
 jobs:
   release-next:
@@ -17,7 +17,7 @@ jobs:
           extra_plugins: |
             @semantic-release/changelog@^5.0.1
             @semantic-release/git@9.0.0
-            @saithodev/semantic-release-backmerge
+            @semantic-release/exec
             conventional-changelog-conventionalcommits@^4.3.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

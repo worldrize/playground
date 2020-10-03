@@ -1,7 +1,7 @@
 {
   "branches": [
-    "release",
-    {name: "master", "prerelease": "beta"}
+    "master",
+    {name: "beta", "prerelease": true},
   ],
   "plugins": [
     ["@semantic-release/commit-analyzer", {
@@ -47,13 +47,18 @@
       },
     }],
     "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "successCmd": "./scripts/semver.sed.sh ${nextRelease.version}"
+      }
+    ],
     "@semantic-release/github",
     ["@semantic-release/git", {
-      "message": "chore(release): ${nextRelease.version} [skip semantic-release]",
-    }],
-    ["@saithodev/semantic-release-backmerge", {
-      "branchName": "master",
-      "message": "chore(release): Preparations for next release [skip ci]",
+      "assets": [
+        "pubspec.yaml",
+        "CHANGELOG.md",
+      ],
     }],
   ],
 }
