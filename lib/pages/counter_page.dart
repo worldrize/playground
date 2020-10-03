@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playground/atoms/add_button.dart';
 import 'package:playground/domain/counter_state.dart';
 import 'package:playground/flavors.dart';
+import 'package:playground/repo/counter_repository.dart';
 import 'package:playground/service/counter_service.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -11,9 +12,12 @@ import 'package:state_notifier/state_notifier.dart';
 
 // <https://qiita.com/karamage/items/8d1352e5a4f1b079210b>
 class Counter extends StateNotifier<CounterState> with LocatorMixin {
-  Counter() : super(const CounterState(count: 0));
+  Counter(CounterService service)
+      : _counterService = service,
+        super(const CounterState(count: 0));
 
-  CounterService get _counterService => read();
+  // TODO: Locator mixin
+  CounterService _counterService;
 
   Future increment() async {
     // try-catch
@@ -29,9 +33,10 @@ class Counter extends StateNotifier<CounterState> with LocatorMixin {
   }
 }
 
-//final counterRepo = CounterRepositoryImpl();
-//final counterService = CounterService(counterRepo);
-final counterProvider = StateNotifierProvider((_) => Counter());
+// TODO: ProviderでProvideしてLocatorMixinで
+final counterRepo = CounterRepositoryImpl();
+final counterService = CounterService(counterRepo);
+final counterProvider = StateNotifierProvider((_) => Counter(counterService));
 
 class CounterPage extends HookWidget {
   CounterPage({@required this.flavor});
