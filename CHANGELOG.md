@@ -1,3 +1,11 @@
+### [1.1.2](https://github.com/worldrize/playground/compare/v1.1.1...v1.1.2) (2020-10-03)
+
+
+### Bug Fixes
+
+* **ci:** fix rc ([a689718](https://github.com/worldrize/playground/commit/a6897181ac8c2f3fb20908d8f5fa348147b9d97e))
+* **ci:** fix rc ([c577728](https://github.com/worldrize/playground/commit/c577728e6b3ab57273e9d97ceea10d0bb8451d2d))
+
 ### [1.1.2-beta.1](https://github.com/worldrize/playground/compare/v1.1.1...v1.1.2-beta.1) (2020-10-03)
 
 
