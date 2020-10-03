@@ -1,3 +1,10 @@
+### [1.1.1-beta.1](https://github.com/worldrize/playground/compare/v1.1.0...v1.1.1-beta.1) (2020-10-03)
+
+
+### Bug Fixes
+
+* fix app ([db71c4c](https://github.com/worldrize/playground/commit/db71c4ca51980f853cf1110f1a8217d42a4ba426))
+
 ## [1.1.0](https://github.com/worldrize/playground/compare/v1.0.0...v1.1.0) (2020-10-03)
 
 
