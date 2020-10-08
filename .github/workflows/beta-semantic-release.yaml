@@ -13,7 +13,6 @@ jobs:
         with:
           branches: |
             [
-              'dummy',
               {
                 name: 'master',
                 prerelease: true

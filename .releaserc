@@ -4,6 +4,10 @@
        name: 'master',
        prerelease: false,
      },
+     {
+       name: 'master',
+       prerelease: true,
+     },
   ],
   "plugins": [
     ["@semantic-release/commit-analyzer", {
