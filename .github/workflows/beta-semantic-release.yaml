@@ -13,7 +13,7 @@ jobs:
         with:
           branches: |
             [{
-              name: 'beta',
+              name: 'master',
               prerelease: true
             }]
           extra_plugins: |
