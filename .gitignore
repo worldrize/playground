@@ -42,3 +42,5 @@ app.*.map.json
 
 # js
 node_modules/
+
+env.yml
