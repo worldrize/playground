@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playground/app.dart';
 import 'package:playground/flavors.dart';
@@ -34,40 +35,38 @@ class SystemPageCN extends ChangeNotifier {
   }
 }
 
-class SystemPage extends StatelessWidget {
+class SystemPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer((BuildContext context, read) {
-      final sp = read(systemProvider);
-      return Scaffold(
-        appBar: AppBar(title: Text(F.title)),
-        body: SettingsList(
-          sections: [
-            SettingsSection(
-              title: 'system mode',
-              tiles: [
+    final sp = useProvider(systemProvider);
+    return Scaffold(
+      appBar: AppBar(title: Text(F.title)),
+      body: SettingsList(
+        sections: [
+          SettingsSection(
+            title: 'system mode',
+            tiles: [
+              SettingsTile.switchTile(
+                switchValue: sp.isSystemMode(),
+                title: '端末の設定に従う',
+                onToggle: (v) {
+                  print('system: $v');
+                  sp.setSystemMode(v);
+                },
+              ),
+              if (!sp.isSystemMode())
                 SettingsTile.switchTile(
-                  switchValue: sp.isSystemMode(),
-                  title: '端末の設定に従う',
+                  switchValue: sp.isDarkMode(),
+                  title: 'dark mode',
                   onToggle: (v) {
-                    print('system: $v');
-                    sp.setSystemMode(v);
+                    print('dark: $v');
+                    sp.setDarkMode(v);
                   },
                 ),
-                if (!sp.isSystemMode())
-                  SettingsTile.switchTile(
-                    switchValue: sp.isDarkMode(),
-                    title: 'dark mode',
-                    onToggle: (v) {
-                      print('dark: $v');
-                      sp.setDarkMode(v);
-                    },
-                  ),
-              ],
-            ),
-          ],
-        ),
-      );
-    });
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

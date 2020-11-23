@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playground/flavors.dart';
 import 'package:playground/pages/counter_page.dart';
@@ -12,6 +12,19 @@ final _systemService = SystemService(_systemRepo);
 final systemProvider =
     ChangeNotifierProvider((_) => SystemPageCN(systemService: _systemService));
 
+var pages = [
+  {
+    'name': 'CounterPage',
+    'route': '/counter',
+    'builder': (BuildContext context) => new CounterPage(flavor: F.appFlavor),
+  },
+  {
+    'name': 'SystemPage',
+    'route': '/system',
+    'builder': (BuildContext context) => new SystemPage(),
+  },
+];
+
 void runAppWithFlavor() async {
   // const にしないとコンパイル時に読み込まれない
   // <https://qiita.com/tetsufe/items/3f2257ac12f812d3f2d6>
@@ -21,53 +34,45 @@ void runAppWithFlavor() async {
   // set flavor enum
   F.fromEnvironment(flavor);
 
-<<<<<<< Updated upstream
-  var pages = [
-    {
-      'name': 'CounterPage',
-      'route': '/counter',
-      'builder': (BuildContext context) => new CounterPage(flavor: F.appFlavor),
-    },
-    {
-      'name': 'SystemPage',
-      'route': '/system',
-      'builder': (BuildContext context) => new SystemPage(),
-    },
-  ];
-  runApp(ProviderScope(
-    child: Consumer(
-      (context, read) => MaterialApp(
-        home: Builder(
-          builder: (context) => Scaffold(
-            body: ListView(
-              children: pages
-                  .map(
-                    (e) => GestureDetector(
-                      onTap: () => Navigator.of(context).pushNamed(e['route']),
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        height: 50,
-                        child: Text(e['name']),
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-        ),
-        routes: Map.fromEntries(
-            pages.map((e) => MapEntry(e['route'], e['builder']))),
-        themeMode: read(systemProvider).getThemeMode(),
-        darkTheme: ThemeData.dark(),
-=======
-  print("hogeee");
-
-  runApp(ProviderScope(
-    child: MaterialApp(
-      home: CounterPage(
-        flavor: F.appFlavor,
->>>>>>> Stashed changes
-      ),
+  runApp(
+    ProviderScope(
+      child: App(),
     ),
-  ));
+  );
+}
+
+class App extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: RoutesList(),
+      routes:
+          Map.fromEntries(pages.map((e) => MapEntry(e['route'], e['builder']))),
+      themeMode: useProvider(systemProvider).getThemeMode(),
+      darkTheme: ThemeData.dark(),
+    );
+  }
+}
+
+class RoutesList extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView(
+        children: pages
+            .map(
+              (e) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                  onPressed: () => Navigator.of(context).pushNamed(e['route']),
+                  child: Text(
+                    e['name'],
+                  ),
+                ),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
 }
