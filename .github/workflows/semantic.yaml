@@ -1,9 +1,12 @@
-name: beta semantic release
+name: semantic release
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - release
+      - master
 
 jobs:
-  beta-release:
+  release-next:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,18 +14,11 @@ jobs:
         id: semantic
         uses: cycjimmy/semantic-release-action@v2
         with:
-          branches: |
-            [
-              'dummy',
-              {
-                name: 'master',
-                prerelease: true
-              },
-            ]
           extra_plugins: |
             @semantic-release/changelog@^5.0.1
             @semantic-release/git@9.0.0
-            @semantic-release/exec
+            @google/semantic-release-replace-plugin
+            @saithodev/semantic-release-backmerge
             conventional-changelog-conventionalcommits@^4.3.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

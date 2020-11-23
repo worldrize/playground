@@ -21,6 +21,7 @@ void runAppWithFlavor() async {
   // set flavor enum
   F.fromEnvironment(flavor);
 
+<<<<<<< Updated upstream
   var pages = [
     {
       'name': 'CounterPage',
@@ -58,6 +59,14 @@ void runAppWithFlavor() async {
             pages.map((e) => MapEntry(e['route'], e['builder']))),
         themeMode: read(systemProvider).getThemeMode(),
         darkTheme: ThemeData.dark(),
+=======
+  print("hogeee");
+
+  runApp(ProviderScope(
+    child: MaterialApp(
+      home: CounterPage(
+        flavor: F.appFlavor,
+>>>>>>> Stashed changes
       ),
     ),
   ));
