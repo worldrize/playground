@@ -3,9 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playground/flavors.dart';
 import 'package:playground/pages/counter_page.dart';
+import 'package:playground/pages/iap_page.dart';
 import 'package:playground/pages/system_page.dart';
 import 'package:playground/repo/system_repository.dart';
 import 'package:playground/service/system_service.dart';
+import 'package:playground/util/secrets.dart';
 
 final _systemRepo = SystemRepositoryImpl();
 final _systemService = SystemService(_systemRepo);
@@ -23,9 +25,17 @@ var pages = [
     'route': '/system',
     'builder': (BuildContext context) => new SystemPage(),
   },
+  {
+    'name': 'IapPage',
+    'route': '/iap',
+    'builder': (BuildContext context) => new IapPage(),
+  }
 ];
 
 void runAppWithFlavor() async {
+  // If you're running an application and need to access the binary messenger before `runApp()` has been called (for example, during plugin initialization), then you need to explicitly call the `WidgetsFlutterBinding.ensureInitialized()` first.
+  WidgetsFlutterBinding.ensureInitialized();
+
   // const にしないとコンパイル時に読み込まれない
   // <https://qiita.com/tetsufe/items/3f2257ac12f812d3f2d6>
   const flavor =
@@ -33,6 +43,9 @@ void runAppWithFlavor() async {
   print(flavor);
   // set flavor enum
   F.fromEnvironment(flavor);
+
+  await Secrets()
+    ..loadSecrets();
 
   runApp(
     ProviderScope(
