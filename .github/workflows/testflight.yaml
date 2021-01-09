@@ -1,4 +1,4 @@
-name: beta semantic release
+name: testflight
 on:
   workflow_dispatch:
 
