@@ -1,0 +1,39 @@
+name: beta semantic release
+on:
+  workflow_dispatch:
+
+jobs:
+  beta-release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_11.3.app/Contents/Developer'
+      - name: Bundle install
+        run: cd ./ios && bundle install
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - name: Setup flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "1.22.4"
+          channel: "stable"
+      - name: Install tools
+        run: |
+          flutter pub get
+          cd ./ios && pod install
+      - name: Deploy to TestFlight
+        run: |
+          cd ./ios && bundle exec fastlane beta
+        env:
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          # FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
+          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
