@@ -18,7 +18,6 @@ default_platform(:ios)
 platform :ios do
   lane :beta do
     if is_ci
-      puts "now in ci!!!!!!!!!!!!!!!!!!"
       create_keychain(
         name: ENV['MATCH_KEYCHAIN_NAME'],
         password: ENV["MATCH_KEYCHAIN_PASSWORD"],
@@ -35,6 +34,7 @@ platform :ios do
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
     )
     build_app(
+      clean: true,
       scheme: "prd",
       workspace: "Runner.xcworkspace",
       export_method: "app-store"
