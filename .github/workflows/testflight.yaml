@@ -36,7 +36,7 @@ jobs:
           cd ./ios && pod install
 
       - name: Deploy to TestFlight
-        timeout-minutes: 60
+        # timeout-minutes: 60
         run: |
           cd ./ios && bundle exec fastlane beta
         env:
