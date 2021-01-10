@@ -33,6 +33,7 @@
 /build/
 *.ipa
 *app.dSYM.zip
+/ios/Gemfile.lock
 
 # Web related
 lib/generated_plugin_registrant.dart
