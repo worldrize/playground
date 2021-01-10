@@ -20,16 +20,17 @@ jobs:
         with:
           flutter-version: "1.22.4"
           channel: "stable"
-      - name: Install tools
-        run: |
-          flutter pub get
-          cd ./ios && pod install
 
       - name: Setup SSH
         uses: MrSquaare/ssh-setup-action@v1
         with:
           host: github.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install tools
+        run: |
+          flutter clean && flutter pub get
+          cd ./ios && pod install
 
       - name: Deploy to TestFlight
         timeout-minutes: 60
