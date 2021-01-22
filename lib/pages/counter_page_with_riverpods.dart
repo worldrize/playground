@@ -42,6 +42,16 @@ class CounterState extends ChangeNotifier {
     print("color in incriment: ${gs.color.toString()}");
     notifyListeners();
   }
+
+  void asyncIncrement() async {
+    print('start async');
+    final gs = ref.watch(globalStateNotifier);
+    print("color in async incriment: ${gs.color.toString()}");
+    await Future.delayed(const Duration(seconds: 1));
+    print('end async');
+    count += 1;
+    notifyListeners();
+  }
 }
 
 class CounterPageWithRiverpods extends StatelessWidget {
@@ -61,6 +71,10 @@ class CounterPageWithRiverpods extends StatelessWidget {
             children: [
               Center(
                 child: Text(cn.count.toString()),
+              ),
+              RaisedButton(
+                onPressed: cn.asyncIncrement,
+                child: Text('async Incriment'),
               ),
             ],
           ),
