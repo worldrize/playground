@@ -13,7 +13,7 @@ class Global extends StateNotifier<GlobalState> {
   Global() : super(const GlobalState(color: Colors.red));
 
   get color {
-    print('color in state notifier: ${state.color}');
+    print('read color in state notifier: ${state.color}');
     return state.color;
   }
 
@@ -26,18 +26,20 @@ class Global extends StateNotifier<GlobalState> {
 // 一気に複数のProviderがロードされて重いとかがない
 final counterNotifier = ChangeNotifierProvider((ref) {
   print('in change notifier provider create');
-  return CounterState(color: ref.watch(globalStateNotifier).color);
+  return CounterState(ref: ref);
 });
 
 class CounterState extends ChangeNotifier {
-  CounterState({@required Color this.color});
+  CounterState({@required ProviderReference this.ref});
 
-  Color color;
+  final ProviderReference ref;
+
   var count = 0;
 
   void increment() {
     count += 1;
-    print("color in incriment: ${color.toString()}");
+    final gs = ref.watch(globalStateNotifier);
+    print("color in incriment: ${gs.color.toString()}");
     notifyListeners();
   }
 }
