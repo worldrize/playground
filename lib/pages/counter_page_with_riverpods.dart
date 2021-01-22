@@ -22,6 +22,8 @@ class Global extends StateNotifier<GlobalState> {
   }
 }
 
+// 初めてwatch(readも?)されたときにCounterStateが作られるので
+// 一気に複数のProviderがロードされて重いとかがない
 final counterNotifier = ChangeNotifierProvider((ref) {
   print('in change notifier provider create');
   return CounterState(color: ref.watch(globalStateNotifier).color);
@@ -52,7 +54,7 @@ class CounterPageWithRiverpods extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
               title: Text("counter page with riverpods"),
-              backgroundColor: gs.color),
+              backgroundColor: context.read(globalStateNotifier).color),
           body: Column(
             children: [
               Center(
@@ -60,7 +62,11 @@ class CounterPageWithRiverpods extends StatelessWidget {
               ),
             ],
           ),
-          floatingActionButton: AddButton(onPressed: cn.increment),
+          floatingActionButton: AddButton(onPressed: () {
+            cn.increment();
+            print(
+                'on pressed color: ${context.read(globalStateNotifier).color}');
+          }),
         );
       },
     );
