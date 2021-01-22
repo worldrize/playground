@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:playground/atoms/add_button.dart';
 import 'package:playground/domain/global_state.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 final globalStateNotifier = StateNotifierProvider<Global>((_) => Global());
 
@@ -47,6 +46,7 @@ class CounterPageWithRiverpods extends StatelessWidget {
     return Consumer(
       builder: (context, watch, _) {
         final gs = watch(globalStateNotifier);
+        print('called consumer builder');
         gs.color = [Colors.red, Colors.blue, Colors.green][Random().nextInt(3)];
         final cn = watch(counterNotifier);
         return Scaffold(
