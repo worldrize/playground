@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/all.dart';
 import 'package:playground/flavors.dart';
 import 'package:playground/pages/counter_page.dart';
+import 'package:playground/pages/counter_page_with_riverpods.dart';
 import 'package:playground/pages/iap_page.dart';
 import 'package:playground/pages/system_page.dart';
 import 'package:playground/repo/system_repository.dart';
@@ -29,7 +30,12 @@ var pages = [
     'name': 'IapPage',
     'route': '/iap',
     'builder': (BuildContext context) => new IapPage(),
-  }
+  },
+  {
+    'name': 'CounterPageWithRiverpods',
+    'route': '/counter-river',
+    'builder': (BuildContext context) => CounterPageWithRiverpods(),
+  },
 ];
 
 void runAppWithFlavor() async {
