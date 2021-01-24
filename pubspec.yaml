@@ -20,6 +20,18 @@ dependencies:
   settings_ui: ^0.2.0
   purchases_flutter: ^1.4.1
 
+  firebase_core:
+  firebase_analytics:
+  firebase_auth:
+  firebase_auth_mocks:
+  google_sign_in:
+  google_sign_in_mocks:
+  apple_sign_in:
+  firebase_crashlytics:
+
+  cloud_firestore:
+  cloud_firestore_mocks:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

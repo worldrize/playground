@@ -44,3 +44,5 @@ app.*.map.json
 node_modules/
 
 secrets/env.yml
+*.jks
+google-services.json

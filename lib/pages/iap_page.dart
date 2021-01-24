@@ -12,15 +12,13 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 
 // <https://qiita.com/karamage/items/8d1352e5a4f1b079210b>
 class Iap extends StateNotifier<IapState> {
-  Iap() : super(const IapState()) {
-    initPlatformState();
-  }
+  Iap() : super(const IapState());
 
   // 初期化処理
   // 購入情報・Offeringsの取得を行う
   Future initPlatformState() async {
     print('initPlatformState');
-    await Purchases.setDebugLogsEnabled(true);
+    // await Purchases.setDebugLogsEnabled(true);
     await Purchases.setup(Secrets.instance.publicSdkKey);
 
     final purchaseInfo = await Purchases.getPurchaserInfo();
@@ -30,19 +28,25 @@ class Iap extends StateNotifier<IapState> {
       return;
     }
 
+    print(purchaseInfo);
+    print(offerings.current);
+
     state = IapState(purchaserInfo: purchaseInfo, offerings: offerings);
   }
 }
 
 // final iapRepo = IapRepository();
 // final counterService = IapService(iapRepo);
-final iapProvider = StateNotifierProvider((_) => Iap());
+final iapProvider = StateNotifierProvider((_) {
+  final iap = Iap();
+  iap.initPlatformState();
+  return iap;
+});
 
 class IapPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final state = useProvider(iapProvider.state);
-    final iap = useProvider(iapProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text('課金画面')),
