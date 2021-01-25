@@ -40,6 +40,7 @@ final counterProvider = StateNotifierProvider((_) => Counter(counterService));
 
 class CounterPage extends HookWidget {
   CounterPage({@required this.flavor});
+
   final Flavor flavor;
 
   @override

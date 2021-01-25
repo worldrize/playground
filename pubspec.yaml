@@ -1,6 +1,6 @@
 name: playground
 description: A new Flutter project.
-version: 1.1.2
+version: 1.1.6
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -19,6 +19,7 @@ dependencies:
   get_it: ^4.0.2
   settings_ui: ^0.2.0
   purchases_flutter: ^1.4.1
+  flutter_riverpod: ^0.12.2
 
   firebase_core:
   firebase_analytics:
@@ -43,7 +44,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - secrets/
 
 # <https://pub.dev/packages/flutter_flavorizr>
 flavorizr:

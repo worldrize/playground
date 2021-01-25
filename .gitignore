@@ -14,6 +14,7 @@
 *.ipr
 *.iws
 .idea/
+/.fvm
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -30,6 +31,9 @@
 .pub-cache/
 .pub/
 /build/
+*.ipa
+*app.dSYM.zip
+/ios/Gemfile.lock
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -46,3 +50,5 @@ node_modules/
 secrets/env.yml
 *.jks
 google-services.json
+# for hamada
+/run.sh

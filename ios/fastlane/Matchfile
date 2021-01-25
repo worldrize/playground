@@ -1,0 +1,8 @@
+git_url("git@github.com:worldrize/playground-certificate.git")
+
+storage_mode("git")
+
+# The default type development, can be: appstore, adhoc, enterprise or development
+type("appstore")
+
+username(ENV["FASTLANE_USER"]) # Your Apple Developer Portal username
