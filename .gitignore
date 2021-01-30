@@ -51,3 +51,7 @@ secrets/env.yml
 
 # for hamada
 /run.sh
+# keystore
+*.jks
+# firebase credential
+google-services.json

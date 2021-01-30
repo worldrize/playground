@@ -26,6 +26,8 @@ class Iap extends StateNotifier<IapState> {
     final purchaseInfo = await Purchases.getPurchaserInfo();
     final offerings = await Purchases.getOfferings();
 
+    print(offerings);
+
     if (!mounted) {
       return;
     }
