@@ -19,7 +19,7 @@ class Counter extends StateNotifier<CounterState> {
   // TODO: Locator mixin
   CounterService _counterService;
 
-  Future increment() async {
+  Future<void> increment() async {
     // try-catch
     try {
       final res = await _counterService.increment(state.count);
@@ -36,7 +36,8 @@ class Counter extends StateNotifier<CounterState> {
 // TODO: ProviderでProvideしてLocatorMixinで
 final counterRepo = CounterRepositoryImpl();
 final counterService = CounterService(counterRepo);
-final counterProvider = StateNotifierProvider((_) => Counter(counterService));
+
+final counterProvider = StateNotifierProvider<Counter, CounterState>((_) => Counter(counterService));
 
 class CounterPage extends HookWidget {
   CounterPage({@required this.flavor});
@@ -45,8 +46,8 @@ class CounterPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = useProvider(counterProvider.state);
-    final counter = useProvider(counterProvider);
+    final count = useProvider(counterProvider);
+    final vm = useProvider(counterProvider.notifier);
     final loading = useState(false);
 
     return Scaffold(
@@ -54,7 +55,7 @@ class CounterPage extends HookWidget {
       body: Column(
         children: [
           Center(
-            child: Text(state.toString()),
+            child: Text(count.toString()),
           ),
           if (loading.value) CircularProgressIndicator(),
         ],
@@ -64,7 +65,7 @@ class CounterPage extends HookWidget {
             ? null
             : () async {
                 loading.value = true;
-                await counter.increment();
+                await vm.increment();
                 loading.value = false;
               },
       ),

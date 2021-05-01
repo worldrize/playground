@@ -3,12 +3,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:playground/atoms/purchase_button.dart';
 import 'package:playground/atoms/restore_button.dart';
 import 'package:playground/domain/iap_state.dart';
 import 'package:playground/util/secrets.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:state_notifier/state_notifier.dart';
 
 // <https://qiita.com/karamage/items/8d1352e5a4f1b079210b>
 class Iap extends StateNotifier<IapState> {
@@ -41,8 +43,7 @@ final iapProvider = StateNotifierProvider((_) => Iap());
 class IapPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final state = useProvider(iapProvider.state);
-    final iap = useProvider(iapProvider);
+    final state = useProvider(iapProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text('課金画面')),
