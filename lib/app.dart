@@ -1,7 +1,9 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playground/flavors.dart';
+import 'package:playground/pages/audio_page.dart';
 import 'package:playground/pages/counter_page.dart';
 import 'package:playground/pages/counter_page_with_riverpods.dart';
 import 'package:playground/pages/iap_page.dart';
@@ -36,6 +38,11 @@ var pages = [
     'route': '/counter-river',
     'builder': (BuildContext context) => CounterPageWithRiverpods(),
   },
+  {
+    'name': 'BackgroundAudioPage',
+    'route': '/background-page',
+    'builder': (BuildContext context) => BackgroundAudioPage(),
+  },
 ];
 
 void runAppWithFlavor() async {
@@ -55,7 +62,9 @@ void runAppWithFlavor() async {
 
   runApp(
     ProviderScope(
-      child: App(),
+      child: AudioServiceWidget(
+          child: App(),
+      ),
     ),
   );
 }

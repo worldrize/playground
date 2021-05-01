@@ -26,7 +26,6 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-
     flavorDimensions "flavor-type"
 
     productFlavors {
@@ -64,6 +63,9 @@ android {
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        // https://note.com/kz23szk/n/na50fab4e2134
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -71,6 +73,9 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+
+            // for audio_service
+            shrinkResources false
         }
     }
 }
