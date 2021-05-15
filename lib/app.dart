@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:playground/flavors.dart';
 import 'package:playground/pages/counter_page.dart';
 import 'package:playground/pages/counter_page_with_riverpods.dart';
 import 'package:playground/pages/iap_page.dart';
 import 'package:playground/pages/system_page.dart';
+import 'package:playground/pages/voice_cache_page.dart';
 import 'package:playground/repo/system_repository.dart';
 import 'package:playground/service/system_service.dart';
 import 'package:playground/util/secrets.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 final _systemRepo = SystemRepositoryImpl();
 final _systemService = SystemService(_systemRepo);
@@ -36,11 +38,18 @@ var pages = [
     'route': '/counter-river',
     'builder': (BuildContext context) => CounterPageWithRiverpods(),
   },
+  {
+    'name': 'VoiceCachePage',
+    'route': '/voice-cache',
+    'builder': (BuildContext context) => VoiceCachePage(),
+  },
 ];
 
 void runAppWithFlavor() async {
   // If you're running an application and need to access the binary messenger before `runApp()` has been called (for example, during plugin initialization), then you need to explicitly call the `WidgetsFlutterBinding.ensureInitialized()` first.
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
 
   // const にしないとコンパイル時に読み込まれない
   // <https://qiita.com/tetsufe/items/3f2257ac12f812d3f2d6>

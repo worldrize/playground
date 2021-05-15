@@ -11,7 +11,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_hooks: ^0.15.0
   hooks_riverpod: ^0.12.1
-  uuid: ^2.2.2
+  uuid:
   yaml:
   freezed_annotation:
   json_serializable:
@@ -20,6 +20,12 @@ dependencies:
   settings_ui: ^0.2.0
   purchases_flutter: ^1.4.1
   flutter_riverpod: ^0.12.2
+
+  firebase_core:
+  firebase_storage:
+  just_audio:
+  assets_audio_player:
+  flutter_cache_manager:
 
 dev_dependencies:
   flutter_test:
