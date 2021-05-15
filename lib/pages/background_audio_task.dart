@@ -24,6 +24,8 @@ class SampleAudioTask extends BackgroundAudioTask {
     // Backgroundにメディアを設定
     AudioServiceBackground.setMediaItem(track);
 
+    AudioServiceBackground.androidForceEnableMediaButtons();
+
     _player.playerStateStream.listen((state) {
       print('state: $state');
 
