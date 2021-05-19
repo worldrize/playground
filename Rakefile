@@ -4,6 +4,11 @@ task :xc do
   sh 'open ios/Runner.xcworkspace'
 end
 
+desc 'build android'
+task :build_android do
+  sh 'flutter build appbundle --release --flavor prd --dart-define FLAVOR=prd'
+end
+
 desc 'コード生成'
 task :gen do
   puts '[Task gen]'

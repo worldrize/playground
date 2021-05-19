@@ -51,3 +51,7 @@ secrets/env.yml
 
 # for hamada
 /run.sh
+
+# android key
+android/app/key.jks
+android/app/key.properties

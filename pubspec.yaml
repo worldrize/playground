@@ -45,24 +45,24 @@ flavorizr:
       app:
         name: "PlayGround-dev"
       android:
-        applicationId: "com.example.playground.dev"
+        applicationId: "com.worldrize.playground.dev"
       ios:
-        bundleId: "com.example.playground.dev"
+        bundleId: "com.worldrize.playground.dev"
 
     stg:
       app:
         name: "PlayGround-stg"
 
       android:
-        applicationId: "com.example.playground.stg"
+        applicationId: "com.worldrize.playground.stg"
       ios:
-        bundleId: "com.example.playground.stg"
+        bundleId: "com.worldrize.playground.stg"
 
     prd:
       app:
         name: "PlayGround-prd"
 
       android:
-        applicationId: "com.example.playground"
+        applicationId: "com.worldrize.playground"
       ios:
-        bundleId: "com.example.playground"
+        bundleId: "com.worldrize.playground"

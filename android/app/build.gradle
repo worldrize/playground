@@ -25,24 +25,30 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-android {
+// signature
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('app/key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
+android {
     flavorDimensions "flavor-type"
 
     productFlavors {
         dev {
             dimension "flavor-type"
-            applicationId "com.example.playground.dev"
+            applicationId "com.worldrize.playground.dev"
             resValue "string", "app_name", "PlayGround-dev"
         }
         stg {
             dimension "flavor-type"
-            applicationId "com.example.playground.stg"
+            applicationId "com.worldrize.playground.stg"
             resValue "string", "app_name", "PlayGround-stg"
         }
         prd {
             dimension "flavor-type"
-            applicationId "com.example.playground"
+            applicationId "com.worldrize.playground"
             resValue "string", "app_name", "PlayGround-prd"
         }
     }
@@ -59,18 +65,25 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.playground"
+        applicationId "com.worldrize.playground"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }
