@@ -26,12 +26,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/purchases_flutter/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   Purchases: 7ebce9418bc16732c3c3bb4b6ff7e7e397de024e
   purchases_flutter: 63ee1ca7b56bc2b4a75bfe15e9ee230ed98987ab
   PurchasesCoreSwift: 50636e307c1ab76c7a7894a87d042665f2fe0be9
   PurchasesHybridCommon: b1dd1c5125ccf99b9e62b5974d0e5145895e8b87
 
-PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
+PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
 COCOAPODS: 1.10.1

@@ -4,9 +4,24 @@ task :xc do
   sh 'open ios/Runner.xcworkspace'
 end
 
-desc 'build android'
-task :build_android do
-  sh 'flutter build appbundle --release --flavor prd --dart-define FLAVOR=prd'
+desc 'build android prd'
+task :build_android_prd do
+  sh 'flutter build appbundle --release --flavor prd --dart-define FLAVOR=prd -t lib/main-prd.dart'
+end
+
+desc 'build android stg'
+task :build_android_stg do
+  sh 'flutter build appbundle --release --flavor stg --dart-define FLAVOR=stg -t lib/main-stg.dart'
+end
+
+desc 'build ios prd'
+task :build_ios_prd do
+  sh 'fvm flutter build ipa --release --flavor prd --dart-define FLAVOR=prd -t lib/main-prd.dart'
+end
+
+desc 'build ios stg'
+task :build_ios_stg do
+  sh 'fvm flutter build ipa --release --flavor stg --dart-define FLAVOR=stg -t lib/main-stg.dart'
 end
 
 desc 'コード生成'
