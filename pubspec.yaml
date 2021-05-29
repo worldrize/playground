@@ -31,7 +31,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - secrets/env.yml
     - assets/
 
 # <https://pub.dev/packages/flutter_flavorizr>
