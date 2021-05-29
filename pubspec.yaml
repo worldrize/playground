@@ -1,9 +1,9 @@
 name: playground
 description: A new Flutter project.
-version: 1.1.6
+version: 1.1.6+69
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.7.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -31,38 +31,38 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+  - assets/
 
 # <https://pub.dev/packages/flutter_flavorizr>
 flavorizr:
   app:
     android:
-      flavorDimensions: "flavor-type"
+      flavorDimensions: flavor-type
     ios:
 
   flavors:
     dev:
       app:
-        name: "PlayGround-dev"
+        name: PlayGround-dev
       android:
-        applicationId: "com.worldrize.playground.dev"
+        applicationId: com.worldrize.playground.dev
       ios:
-        bundleId: "com.worldrize.playground.dev"
+        bundleId: com.worldrize.playground.dev
 
     stg:
       app:
-        name: "PlayGround-stg"
+        name: PlayGround-stg
 
       android:
-        applicationId: "com.worldrize.playground.stg"
+        applicationId: com.worldrize.playground.stg
       ios:
-        bundleId: "com.worldrize.playground.stg"
+        bundleId: com.worldrize.playground.stg
 
     prd:
       app:
-        name: "PlayGround-prd"
+        name: PlayGround-prd
 
       android:
-        applicationId: "com.worldrize.playground"
+        applicationId: com.worldrize.playground
       ios:
-        bundleId: "com.worldrize.playground"
+        bundleId: com.worldrize.playground

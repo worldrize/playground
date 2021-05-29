@@ -60,3 +60,27 @@ task :test do
   # flutter unit test
   sh 'flutter test --coverage'
 end
+
+desc 'bump build'
+task :bump_build do
+  ver = `python ./scripts/pubspec_semver.py ./pubspec.yaml --build`.chomp
+  sh "git tag v#{ver}"
+end
+
+desc 'bump patch'
+task :bump_patch do
+  ver = `python ./scripts/pubspec_semver.py ./pubspec.yaml --patch`.chomp
+  sh "git tag v#{ver}"
+end
+
+desc 'bump minor'
+task :bump_minor do
+  ver = `python ./scripts/pubspec_semver.py ./pubspec.yaml --minor`.chomp
+  sh "git tag v#{ver}"
+end
+
+desc 'bump major'
+task :bump_major do
+  ver = `python ./scripts/pubspec_semver.py ./pubspec.yaml --major`.chomp
+  sh "git tag v#{ver}"
+end
